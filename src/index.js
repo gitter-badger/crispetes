@@ -125,55 +125,67 @@ class Keypad extends React.Component {
 
 				<div className="row">
 					<div className="col-xs-12">
-						<Button config={this.props.config} caption="Play" action="toggleplaying" className="btn-success btn-lg" />
+						<Button config={this.props.config} icon="play" action="toggleplaying" className="btn-success btn-lg" />
 					</div>
 				</div>
 				
 				<div className="row">
 					<div className="col-xs-2">
-						<Button config={this.props.config} caption="Favourite" action="togglefavourite" className="btn-primary btn-lg" />
+						<Button config={this.props.config} icon="arrow-left" action="back" className="btn-primary btn-lg" />
 					</div>
 					<div className="col-xs-8">
-						<Button config={this.props.config} caption="Up" action="up" className="btn-primary btn-lg" />
+						<Button config={this.props.config} action="up" icon="triangle-top" className="btn-primary btn-lg" />
 					</div>
 					<div className="col-xs-2">
-						<Button config={this.props.config} caption="Watched" action="togglewatched" className="btn-primary btn-lg" />
+						<Button config={this.props.config} action="togglefullscreen" icon="fullscreen" className="btn-primary btn-lg" />
 					</div>
 				</div>
 				<div className="row">
 					<div className="col-xs-4">
-						<Button config={this.props.config} caption="Left" action="left" className="btn-primary btn-lg" />
+						<Button config={this.props.config} action="left" icon="triangle-left" className="btn-primary btn-lg" />
 					</div>
 					<div className="col-xs-4">
-						<Button config={this.props.config} caption="OK" action="enter" className="btn-primary btn-lg" />
+						<Button config={this.props.config} icon="ok" action="enter" className="btn-primary btn-lg" />
 					</div>
 					<div className="col-xs-4">
-						<Button config={this.props.config} caption="Right" action="right" className="btn-primary btn-lg" />
+						<Button config={this.props.config} action="right" icon="triangle-right" className="btn-primary btn-lg" />
 					</div>
 				</div>
 				<div className="row">
 					<div className="col-xs-2">
-						<Button config={this.props.config} caption="Quality" action="togglequality" className="btn-primary btn-lg" />
+						<Button config={this.props.config} icon="hd-video" action="togglequality" className="btn-primary btn-lg" />
 					</div>
 					<div className="col-xs-8">
-						<Button config={this.props.config} caption="Down" action="down" className="btn-primary btn-lg" />
+						<Button config={this.props.config} action="down" icon="triangle-bottom" className="btn-primary btn-lg" />
 					</div>
 					<div className="col-xs-2">
-						<Button config={this.props.config} caption="Fullscreen" action="togglefullscreen" className="btn-primary btn-lg" />
+						<Button config={this.props.config} icon="volume-off" action="togglemute" className="btn-primary btn-lg" />
 					</div>
 				</div>
 
 				<div className="row">
 					<div className="col-xs-4">
-						<Button config={this.props.config} caption="Watchlist" action="showwatchlist" className="btn-primary btn-lg" />
+						<Button config={this.props.config} icon="inbox" action="showwatchlist" className="btn-primary btn-lg" />
 					</div>
-
 					<div className="col-xs-4">
-						<Button config={this.props.config} caption="Favourites" action="showfavourites" className="btn-primary btn-lg" />
+						<Button config={this.props.config} icon="heart" action="showfavourites" className="btn-primary btn-lg" />
 					</div>
-
 					<div className="col-xs-4">
-						<Button config={this.props.config} caption="Search" action="search" className="btn-primary btn-lg" />
+						<Button config={this.props.config} icon="search" action="search" className="btn-primary btn-lg" />
+					</div>
+				</div>
+				<div className="row">
+					<div className="col-xs-3">
+						<Button config={this.props.config} icon="menu-up" action="previousseason" className="btn-primary btn-lg" />
+					</div>
+					<div className="col-xs-3">
+						<Button config={this.props.config} icon="menu-down" action="nextseason" className="btn-primary btn-lg" />
+					</div>
+					<div className="col-xs-3">
+						<Button config={this.props.config} icon="heart" action="togglefavourite" className="btn-primary btn-lg" />
+					</div>
+					<div className="col-xs-3">
+						<Button config={this.props.config} icon="eye-open" action="togglewatched" className="btn-primary btn-lg" />
 					</div>
 				</div>
 			</div>
@@ -212,13 +224,17 @@ class Button extends React.Component {
 
 	render() {
 		return (
-			<button onClick={this.handleClick} className={"btn btn-block "+this.props.className} type="submit">{this.props.caption}</button>
+			<button onClick={this.handleClick} className={"btn btn-block "+this.props.className} type="submit">
+				{this.props.icon &&
+					<span className={"glyphicon glyphicon-"+this.props.icon} aria-hidden="true"></span>
+				}
+				{this.props.caption}
+			</button>
 		);
 	}
 }
 
 // ========================================
-setInterval(App.ping, 1000);
 
 ReactDOM.render(
 	<App />,
