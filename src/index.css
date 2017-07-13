@@ -1,0 +1,5 @@
+.modal-sm .modal-header,
+.modal-sm .modal-body,
+.modal-sm .modal-footer {
+	padding: 10px 15px;
+}

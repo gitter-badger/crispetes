@@ -21,29 +21,20 @@ class App extends React.Component {
 		});
 	}
 
-	ping() {
-		console.log('hola');
-	}
-
 	render() {
 		return (
-			<div className="container-fluid">
-				<div className="row">
-					<div className="col-xs-12">
-						<h1>Crispetes</h1>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-xs-12">
+			<div>
+				<nav className="navbar navbar-toggleable-xl navbar-inverse bg-inverse">
+					<a className="navbar-brand" href="#logo"><img alt="Brand" src="/img/favicon.png" /></a>
+ 					
+ 					<div className="ml-auto">
 						<ConfigForm config={this.state} onConfigChange={this.handleConfigChange} />
 					</div>
-				</div>
+				</nav>
 
-				<div className="row">
-					<div className="col-xs-12">
-						<Keypad config={this.state} />
-					</div>
-				</div>			
+				<div className="container-fluid">
+					<Keypad config={this.state} />
+				</div>
 			</div>
 		);
 	}
@@ -70,37 +61,53 @@ class ConfigForm extends React.Component {
 	render() {
 		return (
 			<div>
-				<a className="btn btn-default btn-sm" role="button" data-toggle="collapse" href="#settings" aria-expanded="false" aria-controls="settings">
-	  				<span className="glyphicon glyphicon-cog" aria-hidden="true"></span>
-				</a>
-				<div className="collapse" id="settings">
-					<form onSubmit={this.handleSubmit}>
-						<fieldset>
-							<legend>Settings</legend>
+				<button type="button" className="btn btn-outline-secondary" data-toggle="modal" data-target="#configModal"><span className="fa fa-cog"></span></button>
 
-							<div className="form-group">
-								<label htmlFor="ip">Local IP Address</label>
-								<input onChange={this.handleInputChange} defaultValue={this.props.config.ip} type="text" id="ip" name="ip" className="form-control" placeholder="192.168.1.2" />
+				<div className="modal fade" id="configModal" role="dialog" aria-labelledby="configModalLabel" aria-hidden="true">
+					<div className="modal-dialog modal-sm" role="document">
+						<div className="modal-content">
+							<div className="modal-header">
+								<h6 className="modal-title modal-title" id="configModalLabel">Settings</h6>
+								<button type="button" className="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
 							</div>
-							
-							<div className="form-group">
-								<label htmlFor="port">HTTP API Port</label>
-								<input onChange={this.handleInputChange} defaultValue={this.props.config.port} type="text" id="port" name="port" className="form-control" placeholder="8008" />
-							</div>
+							<div className="modal-body">
+								<form onSubmit={this.handleSubmit}>
+									<div className="form-group row">
+										<label htmlFor="ip" className="col-4 col-form-label col-form-label-sm">Local IP Address</label>
+										<div className="col-8">
+											<input onChange={this.handleInputChange} defaultValue={this.props.config.ip} type="text" id="ip" name="ip" className="form-control form-control-sm" placeholder="192.168.1.2" />
+										</div>
+									</div>
+									
+									<div className="form-group row">
+										<label htmlFor="port" className="col-4 col-form-label col-form-label-sm">HTTP API Port</label>
+										<div className="col-8">
+											<input onChange={this.handleInputChange} defaultValue={this.props.config.port} type="text" id="port" name="port" className="form-control form-control-sm" placeholder="8008" />
+										</div>
+									</div>
 
-							<div className="form-group">
-								<label htmlFor="username">HTTP API Username</label>
-								<input onChange={this.handleInputChange} defaultValue={this.props.config.username} type="text" id="username" name="username" className="form-control" placeholder="popcorn" />
-							</div>
+									<div className="form-group row">
+										<label htmlFor="username" className="col-4 col-form-label col-form-label-sm">HTTP API Username</label>
+										<div className="col-8">
+											<input onChange={this.handleInputChange} defaultValue={this.props.config.username} type="text" id="username" name="username" className="form-control form-control-sm" placeholder="popcorn" />
+										</div>
+									</div>
 
-							<div className="form-group">
-								<label htmlFor="password">HTTP API Password</label>
-								<input onChange={this.handleInputChange} defaultValue={this.props.config.password} type="text" id="password" name="password" className="form-control" placeholder="popcorn" />
+									<div className="form-group row">
+										<label htmlFor="password" className="col-4 col-form-label col-form-label-sm">HTTP API Password</label>
+										<div className="col-8">
+											<input onChange={this.handleInputChange} defaultValue={this.props.config.password} type="text" id="password" name="password" className="form-control form-control-sm" placeholder="popcorn" />
+										</div>
+									</div>
+								</form>
 							</div>
-
-							<button type="submit" className="btn btn-success">Save</button>
-						</fieldset>
-					</form>
+							<div className="modal-footer">
+								<button type="button" data-dismiss="modal" className="btn btn-primary btn-sm">Save changes</button>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		);
@@ -112,80 +119,82 @@ class Keypad extends React.Component {
 		return (
 			<div>
 				<div className="row">
-					<div className="col-xs-4">
-						<Button config={this.props.config} caption="Movies" action="movieslist" className="btn-primary btn-lg" />
-					</div>
-					<div className="col-xs-4">
-						<Button config={this.props.config} caption="Series" action="showslist" className="btn-primary btn-lg" />
-					</div>
-					<div className="col-xs-4">
-						<Button config={this.props.config} caption="Anime" action="animelist" className="btn-primary btn-lg" />
+					<div className="col-12">
+						<ul className="nav nav-pills nav-justified">
+	  						<li className="nav-item">
+								<Button config={this.props.config} caption="Movies" action="movieslist" className="btn-primary" />
+							</li>
+							<li className="nav-item">
+								<Button config={this.props.config} caption="Series" action="showslist" className="btn-primary" />
+								</li>
+							<li className="nav-item">
+								<Button config={this.props.config} caption="Anime" action="animelist" className="btn-primary" />
+							</li>
+						</ul>
 					</div>
 				</div>
-
 				<div className="row">
-					<div className="col-xs-12">
+					<div className="col-12">
 						<Button config={this.props.config} icon="play" action="toggleplaying" className="btn-success btn-lg" />
 					</div>
 				</div>
-				
 				<div className="row">
-					<div className="col-xs-2">
-						<Button config={this.props.config} icon="arrow-left" action="back" className="btn-primary btn-lg" />
+					<div className="col-2">
+						<Button config={this.props.config} icon="arrow-left" action="back" className="btn-link btn-lg" />
 					</div>
-					<div className="col-xs-8">
-						<Button config={this.props.config} action="up" icon="triangle-top" className="btn-primary btn-lg" />
+					<div className="col-8">
+						<Button config={this.props.config} action="up" icon="caret-up" className="btn-link btn-lg" />
 					</div>
-					<div className="col-xs-2">
-						<Button config={this.props.config} action="togglefullscreen" icon="fullscreen" className="btn-primary btn-lg" />
+					<div className="col-2">
+						<Button config={this.props.config} action="togglefullscreen" icon="arrows-alt" className="btn-link btn-lg" />
 					</div>
 				</div>
 				<div className="row">
-					<div className="col-xs-4">
-						<Button config={this.props.config} action="left" icon="triangle-left" className="btn-primary btn-lg" />
+					<div className="col-4">
+						<Button config={this.props.config} action="left" icon="caret-left" className="btn-link btn-lg" />
 					</div>
-					<div className="col-xs-4">
-						<Button config={this.props.config} icon="ok" action="enter" className="btn-primary btn-lg" />
+					<div className="col-4">
+						<Button config={this.props.config} icon="check" action="enter" className="btn-link btn-lg" />
 					</div>
-					<div className="col-xs-4">
-						<Button config={this.props.config} action="right" icon="triangle-right" className="btn-primary btn-lg" />
+					<div className="col-4">
+						<Button config={this.props.config} action="right" icon="caret-right" className="btn-link btn-lg" />
 					</div>
 				</div>
 				<div className="row">
-					<div className="col-xs-2">
-						<Button config={this.props.config} icon="hd-video" action="togglequality" className="btn-primary btn-lg" />
+					<div className="col-2">
+						<Button config={this.props.config} icon="hd-video" action="togglequality" className="btn-link btn-lg" />
 					</div>
-					<div className="col-xs-8">
-						<Button config={this.props.config} action="down" icon="triangle-bottom" className="btn-primary btn-lg" />
+					<div className="col-8">
+						<Button config={this.props.config} action="down" icon="caret-down" className="btn-link btn-lg" />
 					</div>
-					<div className="col-xs-2">
-						<Button config={this.props.config} icon="volume-off" action="togglemute" className="btn-primary btn-lg" />
+					<div className="col-2">
+						<Button config={this.props.config} icon="volume-off" action="togglemute" className="btn-link btn-lg" />
 					</div>
 				</div>
 
 				<div className="row">
-					<div className="col-xs-4">
-						<Button config={this.props.config} icon="inbox" action="showwatchlist" className="btn-primary btn-lg" />
+					<div className="col-4">
+						<Button config={this.props.config} icon="inbox" action="showwatchlist" className="btn-link btn-lg" />
 					</div>
-					<div className="col-xs-4">
-						<Button config={this.props.config} icon="heart" action="showfavourites" className="btn-primary btn-lg" />
+					<div className="col-4">
+						<Button config={this.props.config} icon="heart" action="showfavourites" className="btn-link btn-lg" />
 					</div>
-					<div className="col-xs-4">
-						<Button config={this.props.config} icon="search" action="search" className="btn-primary btn-lg" />
+					<div className="col-4">
+						<Button config={this.props.config} icon="search" action="search" className="btn-link btn-lg" />
 					</div>
 				</div>
 				<div className="row">
-					<div className="col-xs-3">
-						<Button config={this.props.config} icon="menu-up" action="previousseason" className="btn-primary btn-lg" />
+					<div className="col-3">
+						<Button config={this.props.config} icon="toggle-up" action="previousseason" className="btn-link btn-lg" />
 					</div>
-					<div className="col-xs-3">
-						<Button config={this.props.config} icon="menu-down" action="nextseason" className="btn-primary btn-lg" />
+					<div className="col-3">
+						<Button config={this.props.config} icon="toggle-down" action="nextseason" className="btn-link btn-lg" />
 					</div>
-					<div className="col-xs-3">
-						<Button config={this.props.config} icon="heart" action="togglefavourite" className="btn-primary btn-lg" />
+					<div className="col-3">
+						<Button config={this.props.config} icon="heart-o" action="togglefavourite" className="btn-link btn-lg" />
 					</div>
-					<div className="col-xs-3">
-						<Button config={this.props.config} icon="eye-open" action="togglewatched" className="btn-primary btn-lg" />
+					<div className="col-3">
+						<Button config={this.props.config} icon="eye" action="togglewatched" className="btn-link btn-lg" />
 					</div>
 				</div>
 			</div>
@@ -224,9 +233,9 @@ class Button extends React.Component {
 
 	render() {
 		return (
-			<button onClick={this.handleClick} className={"btn btn-block "+this.props.className} type="submit">
+			<button onClick={this.handleClick} className={"btn btn-block "+this.props.className}>
 				{this.props.icon &&
-					<span className={"glyphicon glyphicon-"+this.props.icon} aria-hidden="true"></span>
+					<span className={"fa fa-"+this.props.icon} aria-hidden="true"></span>
 				}
 				{this.props.caption}
 			</button>
