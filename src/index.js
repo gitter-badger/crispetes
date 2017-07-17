@@ -32,10 +32,23 @@ class App extends React.Component {
 					</div>
 				</nav>
 
-				<div className="container-fluid">
-					<Keypad config={this.state} />
+				<Keypad config={this.state} />
+				
+				<div className="content-fluid footer">
+					<div className="row">
+						<div className="col">
+							<Button config={this.state} icon="inbox" action="showwatchlist" className="btn-link btn-lg" />
+						</div>
+						<div className="col">
+							<Button config={this.state} icon="heart" action="showfavourites" className="btn-link btn-lg" />
+						</div>
+						<div className="col">
+							<Button config={this.state} icon="search" action="search" className="btn-link btn-lg" />
+						</div>
+					</div>
 				</div>
 			</div>
+
 		);
 	}
 }
@@ -117,84 +130,81 @@ class ConfigForm extends React.Component {
 class Keypad extends React.Component {
 	render() {
 		return (
-			<div>
+			<div className="keypad container-fluid">
 				<div className="row">
-					<div className="col-12">
-						<ul className="nav nav-pills nav-justified">
-	  						<li className="nav-item">
-								<Button config={this.props.config} caption="Movies" action="movieslist" className="btn-primary" />
+					<ul className="col filter-bar nav nav-justified">
+  						<li className="nav-item active">
+							<Button btype="link" config={this.props.config} caption="Movies" action="movieslist" />
+						</li>
+						<li className="nav-item">
+							<Button btype="link" config={this.props.config} caption="Series" action="showslist" />
 							</li>
-							<li className="nav-item">
-								<Button config={this.props.config} caption="Series" action="showslist" className="btn-primary" />
-								</li>
-							<li className="nav-item">
-								<Button config={this.props.config} caption="Anime" action="animelist" className="btn-primary" />
-							</li>
-						</ul>
-					</div>
+						<li className="nav-item">
+							<Button btype="link" config={this.props.config} caption="Anime" action="animelist" />
+						</li>
+					</ul>
 				</div>
+				{/*
 				<div className="row">
 					<div className="col-12">
 						<Button config={this.props.config} icon="play" action="toggleplaying" className="btn-success btn-lg" />
 					</div>
 				</div>
+				*/}
+
 				<div className="row">
-					<div className="col-2">
-						<Button config={this.props.config} icon="arrow-left" action="back" className="btn-link btn-lg" />
+					<div className="col-3">
+						<Button config={this.props.config} icon="arrow-left" action="back" className="btn-primary btn-lg" />
 					</div>
-					<div className="col-8">
-						<Button config={this.props.config} action="up" icon="caret-up" className="btn-link btn-lg" />
+					<div className="col-3">
+						<Button config={this.props.config} action="togglefullscreen" icon="arrows-alt" className="btn-success btn-lg" />
 					</div>
-					<div className="col-2">
-						<Button config={this.props.config} action="togglefullscreen" icon="arrows-alt" className="btn-link btn-lg" />
+					<div className="col-3">
+						<Button config={this.props.config} icon="toggle-up" action="previousseason" className="btn-primary btn-lg" />
+					</div>
+					<div className="col-3">
+						<Button config={this.props.config} icon="toggle-down" action="nextseason" className="btn-primary btn-lg" />
 					</div>
 				</div>
-				<div className="row">
-					<div className="col-4">
-						<Button config={this.props.config} action="left" icon="caret-left" className="btn-link btn-lg" />
+
+				<div className="cursors">
+					<div className="row">
+						<div className="col">
+							<Button config={this.props.config} action="up" icon="caret-up" className="btn-link btn-lg" />	
+						</div>
 					</div>
-					<div className="col-4">
-						<Button config={this.props.config} icon="check" action="enter" className="btn-link btn-lg" />
+					<div className="row">
+						<div className="col"></div>
+						<div className="col">
+							<Button config={this.props.config} action="left" icon="caret-left" className="btn-link btn-lg" />
+						</div>
+						<div className="col">
+							<Button config={this.props.config} icon="play" action="enter" className="btn-link btn-lg" />
+						</div>
+						<div className="col">
+							<Button config={this.props.config} action="right" icon="caret-right" className="btn-link btn-lg" />
+						</div>
+						<div className="col"></div>
 					</div>
-					<div className="col-4">
-						<Button config={this.props.config} action="right" icon="caret-right" className="btn-link btn-lg" />
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-2">
-						<Button config={this.props.config} icon="hd-video" action="togglequality" className="btn-link btn-lg" />
-					</div>
-					<div className="col-8">
-						<Button config={this.props.config} action="down" icon="caret-down" className="btn-link btn-lg" />
-					</div>
-					<div className="col-2">
-						<Button config={this.props.config} icon="volume-off" action="togglemute" className="btn-link btn-lg" />
+					<div className="row">
+						<div className="col">
+							<Button config={this.props.config} action="down" icon="caret-down" className="btn-link btn-lg" />
+						</div>
 					</div>
 				</div>
 
 				<div className="row">
-					<div className="col-4">
-						<Button config={this.props.config} icon="inbox" action="showwatchlist" className="btn-link btn-lg" />
-					</div>
-					<div className="col-4">
-						<Button config={this.props.config} icon="heart" action="showfavourites" className="btn-link btn-lg" />
-					</div>
-					<div className="col-4">
-						<Button config={this.props.config} icon="search" action="search" className="btn-link btn-lg" />
-					</div>
-				</div>
-				<div className="row">
 					<div className="col-3">
-						<Button config={this.props.config} icon="toggle-up" action="previousseason" className="btn-link btn-lg" />
+						<Button config={this.props.config} icon="hd-video" action="togglequality" className="btn-popcorn btn-lg" />
 					</div>
 					<div className="col-3">
-						<Button config={this.props.config} icon="toggle-down" action="nextseason" className="btn-link btn-lg" />
+						<Button config={this.props.config} icon="volume-off" action="togglemute" className="btn-info btn-lg" />
 					</div>
 					<div className="col-3">
-						<Button config={this.props.config} icon="heart-o" action="togglefavourite" className="btn-link btn-lg" />
+						<Button config={this.props.config} icon="heart-o" action="togglefavourite" className="btn-danger btn-lg" />
 					</div>
 					<div className="col-3">
-						<Button config={this.props.config} icon="eye" action="togglewatched" className="btn-link btn-lg" />
+						<Button config={this.props.config} icon="eye" action="togglewatched" className="btn-warning btn-lg" />
 					</div>
 				</div>
 			</div>
@@ -232,13 +242,25 @@ class Button extends React.Component {
 	}
 
 	render() {
+		var button = <button onClick={this.handleClick} className={"btn btn-block "+this.props.className}>
+							{this.props.icon &&
+								<span className={"fa fa-"+this.props.icon} aria-hidden="true"></span>
+							}
+							{this.props.caption}
+						</button>;
+
+		if(this.props.btype === "link"){
+			button = <a href="#" onClick={this.handleClick} className={this.props.className}>
+							{this.props.icon &&
+								<span className={"fa fa-"+this.props.icon} aria-hidden="true"></span>
+							}
+							{this.props.caption}
+						</a>;
+		}
+
 		return (
-			<button onClick={this.handleClick} className={"btn btn-block "+this.props.className}>
-				{this.props.icon &&
-					<span className={"fa fa-"+this.props.icon} aria-hidden="true"></span>
-				}
-				{this.props.caption}
-			</button>
+			button
+
 		);
 	}
 }
