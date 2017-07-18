@@ -242,20 +242,20 @@ class Button extends React.Component {
 	}
 
 	render() {
-		var button = <button onClick={this.handleClick} className={"btn btn-block "+this.props.className}>
-							{this.props.icon &&
-								<span className={"fa fa-"+this.props.icon} aria-hidden="true"></span>
-							}
-							{this.props.caption}
-						</button>;
+		var icon = this.props.icon ?
+			<span className={"fa fa-"+this.props.icon} aria-hidden="true"></span> :
+			null;
 
-		if(this.props.btype === "link"){
-			button = <a href="#" onClick={this.handleClick} className={this.props.className}>
-							{this.props.icon &&
-								<span className={"fa fa-"+this.props.icon} aria-hidden="true"></span>
-							}
-							{this.props.caption}
-						</a>;
+		var className = ((this.props.btype !== 'link') ? "btn btn-block " : '') + this.props.className
+
+		var props = {
+			onClick		: this.handleClick,
+			className	: className,
+		};
+
+		var button = <button {...props}>{icon}{this.props.caption}</button>;
+		if (this.props.btype === "link") {
+			button = <a href="#" {...props}>{icon}{this.props.caption}</a>;
 		}
 
 		return (
